@@ -1,4 +1,4 @@
-# BLEU_python_for_Response_Generation
+# BLEU
 
 BLEU score for the evaluation of MT
 Calculate BLEU score:
