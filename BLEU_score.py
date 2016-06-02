@@ -49,11 +49,13 @@ def MP(candidate, references, n):
 
 def bleu(candidate, references, weights):
     p_ns = ( MP(candidate, references, i) for i, _ in enumerate(weights, start=1))
-    try:
-        s = math.fsum(w * math.log(p_n) for w, p_n in zip(weights, p_ns))
-    except ValueError:
-        print "some p_ns is 0"
-        return 0
+    s = []
+    for w, p_n in zip(weights, p_ns):
+        try:
+            s.append(w * math.log(p_n))
+        except ValueError:
+            s.append(0)
+    s = math.fsum(s)
 
     bp = BP(candidate, references)
     return bp * math.exp(s)
